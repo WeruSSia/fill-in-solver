@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Blank {
@@ -22,15 +24,61 @@ public class Blank {
         return indexValuePairs;
     }
 
+    private Integer getIndexOfGivenValue(String value){
+        Integer index = null;
+        for(IndexValuePair indexValuePair:indexValuePairs){
+            if(indexValuePair.getValue().equals(value)){
+                index = indexValuePair.getIndex();
+                break;
+            }
+        }
+        return index;
+    }
+
+    public List<Character> getCharactersAtIndexValue(String value){
+        Integer index = getIndexOfGivenValue(value);
+        List<Character> charactersAtIndexValue = new ArrayList<>();
+        for(String word:candidates){
+            charactersAtIndexValue.add(word.charAt(index));
+        }
+        return charactersAtIndexValue;
+    }
+
+    public void addWordToCandidatesSet(String word) {
+        candidates.add(word);
+    }
+
+    public void removeWordFromCandidatesSet(List<Character> characters, Integer index){
+        List<String> candidatesToBeRemoved = new ArrayList<>();
+        for(String word:candidates){
+            if(!characters.contains(word.charAt(index))){
+                candidatesToBeRemoved.add(word);
+            }
+        }
+        candidates.removeAll(candidatesToBeRemoved);
+    }
+
+    public Set<String> getCandidates() {
+        return candidates;
+    }
+
     public int getBlankLength() {
         return blankLength;
+    }
+
+    public Set<String> getValues() {
+        Set<String> values = new HashSet<>();
+        for (IndexValuePair indexValuePair : indexValuePairs) {
+            values.add(indexValuePair.getValue());
+        }
+        return values;
     }
 
     public Set<IndexValuePair> getIndexValuePairs() {
         return indexValuePairs;
     }
 
-    private class IndexValuePair {
+    public class IndexValuePair {
         private int index;
         private String value;
 
