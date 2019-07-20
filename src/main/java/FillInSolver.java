@@ -9,16 +9,15 @@ public class FillInSolver {
     private List<Blank> blanks = new ArrayList<>();
     private List<String> words = new ArrayList<>();
     private Set<String> valuesFromBlanks = new HashSet<>();
+    private Set<String> finalSet = new HashSet<>();
 
-    public void solve(String blanksFileName, String wordsFileName) throws IOException {
+    public void solve(String blanksFileName, String wordsFileName, String solutionFileName) throws Exception {
         getBlanksFromFile(blanksFileName);
         getWordsFromFile(wordsFileName);
         populateCandidatesSets();
-        for (Blank blank : blanks) {
-            System.out.println(blank.getCandidates().toString());
-        }
         getSetOfAllValues();
-        System.out.println(valuesFromBlanks.toString());
+        compareCharactersAndManageCandidates();
+        writeSolutionToFile(solutionFileName);
     }
 
     private void getBlanksFromFile(String fileName) throws IOException {
@@ -61,29 +60,39 @@ public class FillInSolver {
 
     private BlankPair getPairOfBlanksWithSameValue(String value) throws Exception {
         BlankPair blankPair = new BlankPair();
-        for(Blank blank : blanks){
-            if(blank.getValues().contains(value)){
+        for (Blank blank : blanks) {
+            if (blank.getValues().contains(value)) {
                 blankPair.addBlank(blank);
             }
         }
         return blankPair;
     }
 
-    private void compareCharactersAndManageLists() throws Exception { //todo
-        for(String value:valuesFromBlanks){
-            BlankPair blankPair = getPairOfBlanksWithSameValue(value);
-            List<Character> intersection = new ArrayList<>(blankPair.getFirstBlank().getCharactersAtIndexValue(value));
-            intersection.retainAll(blankPair.getSecondBlank().getCharactersAtIndexValue(value));
-            //blankPair.getFirstBlank().removeWordFromCandidatesSet(intersection,);
-            //blankPair.getSecondBlank().removeWordFromCandidatesSet(intersection,);
+    private void compareCharactersAndManageCandidates() throws Exception {
+        boolean solved = false;
+        while (!solved) {
+            solved = true;
+            for (String value : valuesFromBlanks) {
+                BlankPair blankPair = getPairOfBlanksWithSameValue(value);
+                List<Character> intersection = new ArrayList<>(blankPair.getFirstBlank().getCharactersAtIndexValue(value));
+                intersection.retainAll(blankPair.getSecondBlank().getCharactersAtIndexValue(value));
+                boolean changedFirst = blankPair.getFirstBlank().removeWordFromCandidatesSet(intersection, blankPair.getFirstBlank().getIndexOfGivenValue(value));
+                boolean changedSecond = blankPair.getSecondBlank().removeWordFromCandidatesSet(intersection, blankPair.getSecondBlank().getIndexOfGivenValue(value));
+                if (changedFirst || changedSecond) {
+                    solved = false;
+                }
+            }
         }
     }
 
-    private void printList(List<String> listToBePrinted) {
-        for (String s : listToBePrinted) {
-            System.out.print(s);
-            System.out.print(" ");
+    private void writeSolutionToFile(String fileName) throws IOException {
+        FileWriter fileWriter = new FileWriter(fileName);
+        StringBuilder finalSolution = new StringBuilder();
+        for (Blank blank : blanks) {
+            finalSolution.append(blank.toString());
+            finalSolution.append("\n");
         }
-        System.out.println();
+        fileWriter.write(finalSolution.toString());
+        fileWriter.close();
     }
 }

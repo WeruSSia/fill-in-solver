@@ -7,10 +7,17 @@ public class Blank {
     final private int blankLength;
     private Set<IndexValuePair> indexValuePairs;
     private Set<String> candidates = new HashSet<>();
+    private String blankAsString;
 
     public Blank(String blank) {
         this.blankLength = blank.split(" ").length;
         this.indexValuePairs = generateIndexValuePairs(blank);
+        blankAsString = blank;
+    }
+
+    @Override
+    public String toString() {
+        return blankAsString + " " + this.getCandidates();
     }
 
     private Set<IndexValuePair> generateIndexValuePairs(String blank) {
@@ -24,10 +31,10 @@ public class Blank {
         return indexValuePairs;
     }
 
-    private Integer getIndexOfGivenValue(String value){
+    public Integer getIndexOfGivenValue(String value) {
         Integer index = null;
-        for(IndexValuePair indexValuePair:indexValuePairs){
-            if(indexValuePair.getValue().equals(value)){
+        for (IndexValuePair indexValuePair : indexValuePairs) {
+            if (indexValuePair.getValue().equals(value)) {
                 index = indexValuePair.getIndex();
                 break;
             }
@@ -35,10 +42,10 @@ public class Blank {
         return index;
     }
 
-    public List<Character> getCharactersAtIndexValue(String value){
+    public List<Character> getCharactersAtIndexValue(String value) {
         Integer index = getIndexOfGivenValue(value);
         List<Character> charactersAtIndexValue = new ArrayList<>();
-        for(String word:candidates){
+        for (String word : candidates) {
             charactersAtIndexValue.add(word.charAt(index));
         }
         return charactersAtIndexValue;
@@ -48,14 +55,14 @@ public class Blank {
         candidates.add(word);
     }
 
-    public void removeWordFromCandidatesSet(List<Character> characters, Integer index){
+    public boolean removeWordFromCandidatesSet(List<Character> characters, Integer index) {
         List<String> candidatesToBeRemoved = new ArrayList<>();
-        for(String word:candidates){
-            if(!characters.contains(word.charAt(index))){
+        for (String word : candidates) {
+            if (!characters.contains(word.charAt(index))) {
                 candidatesToBeRemoved.add(word);
             }
         }
-        candidates.removeAll(candidatesToBeRemoved);
+        return candidates.removeAll(candidatesToBeRemoved);
     }
 
     public Set<String> getCandidates() {

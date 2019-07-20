@@ -2,12 +2,11 @@ public class BlankPair {
 
     private Blank firstBlank;
     private Blank secondBlank;
-    private String value;
 
     public void addBlank(Blank blank) throws Exception {
-        if(firstBlank!=null){
+        if(firstBlank==null){
             this.firstBlank=blank;
-        }else if(secondBlank!=null){
+        }else if(secondBlank==null){
             this.secondBlank=blank;
         }else{
             throw new Exception("Pair is full");
