@@ -9,7 +9,7 @@ public class Blank {
     private Set<String> candidates = new HashSet<>();
     private String blankAsString;
 
-    public Blank(String blank) {
+    Blank(String blank) {
         this.blankLength = blank.split(" ").length;
         this.indexValuePairs = generateIndexValuePairs(blank);
         blankAsString = blank;
