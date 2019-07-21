@@ -42,9 +42,9 @@ public class Blank {
         return index;
     }
 
-    public List<Character> getCharactersAtIndexValue(String value) {
+    public Set<Character> getCharactersAtIndexValue(String value) {
         Integer index = getIndexOfGivenValue(value);
-        List<Character> charactersAtIndexValue = new ArrayList<>();
+        Set<Character> charactersAtIndexValue = new HashSet<>();
         for (String word : candidates) {
             charactersAtIndexValue.add(word.charAt(index));
         }
@@ -55,7 +55,7 @@ public class Blank {
         candidates.add(word);
     }
 
-    public boolean removeWordFromCandidatesSet(List<Character> characters, Integer index) {
+    public boolean removeWordFromCandidatesSet(Set<Character> characters, Integer index) {
         List<String> candidatesToBeRemoved = new ArrayList<>();
         for (String word : candidates) {
             if (!characters.contains(word.charAt(index))) {
@@ -79,10 +79,6 @@ public class Blank {
             values.add(indexValuePair.getValue());
         }
         return values;
-    }
-
-    public Set<IndexValuePair> getIndexValuePairs() {
-        return indexValuePairs;
     }
 
     public class IndexValuePair {

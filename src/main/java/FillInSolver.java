@@ -9,12 +9,14 @@ public class FillInSolver {
     private List<Blank> blanks = new ArrayList<>();
     private List<String> words = new ArrayList<>();
     private Set<String> valuesFromBlanks = new HashSet<>();
-    private Set<String> finalSet = new HashSet<>();
 
     public void solve(String blanksFileName, String wordsFileName, String solutionFileName) throws Exception {
         getBlanksFromFile(blanksFileName);
         getWordsFromFile(wordsFileName);
         populateCandidatesSets();
+        for (Blank blank : blanks) {
+            System.out.println(blank.getCandidates().toString());
+        }
         getSetOfAllValues();
         compareCharactersAndManageCandidates();
         writeSolutionToFile(solutionFileName);
@@ -74,7 +76,7 @@ public class FillInSolver {
             solved = true;
             for (String value : valuesFromBlanks) {
                 BlankPair blankPair = getPairOfBlanksWithSameValue(value);
-                List<Character> intersection = new ArrayList<>(blankPair.getFirstBlank().getCharactersAtIndexValue(value));
+                Set<Character> intersection = new HashSet<>(blankPair.getFirstBlank().getCharactersAtIndexValue(value));
                 intersection.retainAll(blankPair.getSecondBlank().getCharactersAtIndexValue(value));
                 boolean changedFirst = blankPair.getFirstBlank().removeWordFromCandidatesSet(intersection, blankPair.getFirstBlank().getIndexOfGivenValue(value));
                 boolean changedSecond = blankPair.getSecondBlank().removeWordFromCandidatesSet(intersection, blankPair.getSecondBlank().getIndexOfGivenValue(value));
