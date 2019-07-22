@@ -3,7 +3,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Blank {
+/**
+ * Class represents the blank from the crossword. As blank contains of dots and values (on specified indexes)
+ * the class has a set of values and their indexes as pairs. There is also a list of candidates - words that have the same length as blank.
+ */
+class Blank {
     final private int blankLength;
     private Set<IndexValuePair> indexValuePairs;
     private Set<String> candidates = new HashSet<>();
@@ -15,6 +19,11 @@ public class Blank {
         blankAsString = blank;
     }
 
+    /**
+     * Method converts blank and its candidates list to String.
+     *
+     * @return Blank and its list of candidates.
+     */
     @Override
     public String toString() {
         return blankAsString + " " + this.getCandidates();
@@ -31,7 +40,13 @@ public class Blank {
         return indexValuePairs;
     }
 
-    public Integer getIndexOfGivenValue(String value) {
+    /**
+     * Method looks for the index of a given value in the corresponding indexValuePair.
+     *
+     * @param value Value of which the index will be returned.
+     * @return Index of a given value.
+     */
+    Integer getIndexOfGivenValue(String value) {
         Integer index = null;
         for (IndexValuePair indexValuePair : indexValuePairs) {
             if (indexValuePair.getValue().equals(value)) {
@@ -42,7 +57,13 @@ public class Blank {
         return index;
     }
 
-    public Set<Character> getCharactersAtIndexValue(String value) {
+    /**
+     * Method gets the set of characters at an index of a given value from words in candidates set.
+     *
+     * @param value Value that is on the same index as a character that needs to be read.
+     * @return Set of characters at index of a given value.
+     */
+    Set<Character> getCharactersAtIndexValue(String value) {
         Integer index = getIndexOfGivenValue(value);
         Set<Character> charactersAtIndexValue = new HashSet<>();
         for (String word : candidates) {
@@ -51,11 +72,23 @@ public class Blank {
         return charactersAtIndexValue;
     }
 
-    public void addWordToCandidatesSet(String word) {
+    /**
+     * Adds same length word to candidates list of a blank.
+     *
+     * @param word Word that should be added to the candidates list.
+     */
+    void addWordToCandidatesSet(String word) {
         candidates.add(word);
     }
 
-    public boolean removeWordFromCandidatesSet(Set<Character> characters, Integer index) {
+    /**
+     * Removes a word from candidates set if the character at given index is not in the given set of characters.
+     *
+     * @param characters Set of characters that if words has at a given index should stay on candidates list.
+     * @param index      Index of a character that is checked if it is in the given set of characters.
+     * @return Whether it removed something from the list.
+     */
+    boolean removeWordFromCandidatesSet(Set<Character> characters, Integer index) {
         List<String> candidatesToBeRemoved = new ArrayList<>();
         for (String word : candidates) {
             if (!characters.contains(word.charAt(index))) {
@@ -65,15 +98,30 @@ public class Blank {
         return candidates.removeAll(candidatesToBeRemoved);
     }
 
-    public Set<String> getCandidates() {
+    /**
+     * Method gets the set of candidates (words of the same length) for a blank.
+     *
+     * @return Set of candidates.
+     */
+    Set<String> getCandidates() {
         return candidates;
     }
 
-    public int getBlankLength() {
+    /**
+     * Method gets the length of a blank.
+     *
+     * @return Length of a blank.
+     */
+    int getBlankLength() {
         return blankLength;
     }
 
-    public Set<String> getValues() {
+    /**
+     * Method gets set of all the values that blank contains.
+     *
+     * @return Set of values that blank contains.
+     */
+    Set<String> getValues() {
         Set<String> values = new HashSet<>();
         for (IndexValuePair indexValuePair : indexValuePairs) {
             values.add(indexValuePair.getValue());
@@ -81,7 +129,10 @@ public class Blank {
         return values;
     }
 
-    public class IndexValuePair {
+    /**
+     * Class represents a pair of a value from a blank and its index.
+     */
+    class IndexValuePair {
         private int index;
         private String value;
 
@@ -90,11 +141,21 @@ public class Blank {
             this.value = value;
         }
 
-        public int getIndex() {
+        /**
+         * Gets index from the index-value pair.
+         *
+         * @return Index.
+         */
+        int getIndex() {
             return index;
         }
 
-        public String getValue() {
+        /**
+         * Gets value from the index-value pair.
+         *
+         * @return Value.
+         */
+        String getValue() {
             return value;
         }
     }
