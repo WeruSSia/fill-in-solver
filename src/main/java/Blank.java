@@ -9,9 +9,9 @@ import java.util.Set;
  */
 class Blank {
     final private int blankLength;
-    private Set<IndexValuePair> indexValuePairs;
-    private Set<String> candidates = new HashSet<>();
-    private String blankAsString;
+    private final Set<IndexValuePair> indexValuePairs;
+    private final Set<String> candidates = new HashSet<>();
+    private final String blankAsString;
 
     Blank(String blank) {
         this.blankLength = blank.split(" ").length;
@@ -125,8 +125,8 @@ class Blank {
      * Represents a pair of a value from a blank and its index.
      */
     class IndexValuePair {
-        private int index;
-        private String value;
+        private final int index;
+        private final String value;
 
         private IndexValuePair(int index, String value) {
             this.index = index;

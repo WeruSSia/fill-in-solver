@@ -15,11 +15,12 @@ import java.util.Set;
  * User can input more words that there are blanks. The program will try to match as many correct words to blanks as possible considering every option,
  * but there always has to be a correct answer, otherwise program won't be able to show correct solution.
  */
+@SuppressWarnings("WeakerAccess")
 public class FillInSolver {
 
-    private List<Blank> blanks = new ArrayList<>();
-    private List<String> words = new ArrayList<>();
-    private Set<String> valuesFromBlanks = new HashSet<>();
+    private final List<Blank> blanks = new ArrayList<>();
+    private final List<String> words = new ArrayList<>();
+    private final Set<String> valuesFromBlanks = new HashSet<>();
 
     /**
      * Solves the fill-in puzzle, based on two input files - blanks and words, then populates each blank's candidates set
