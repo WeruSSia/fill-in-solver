@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The class is able to solve the fill-in puzzle given in the two input files - with words and with crossword structure (blanks
- * - representing empty fields that words should be put into).<br><br>
+ * Class solves a fill-in puzzle. One input file contains of words, and the second input file contains of blanks,
+ * that words should be put into.<br><br>
  * In words file each word must be in a different line.<br><br>
  * Crossword structure file must meet these requirements:<br>
  * - each blank mus be in a different line,<br>
  * - blank contains of '.' and numbers, in which '.' is an empty field, and a number is a field that crosses with another blank,<br>
  * - between each '.' and number must be a space.<br><br>
  * User can input more words that there are blanks. The program will try to match as many correct words to blanks as possible considering every option,
- * but there always has to be a correct answer, otherwise program probably won't manage to solve the puzzle.
+ * but there always has to be a correct answer, otherwise program won't be able to show correct solution.
  */
 public class FillInSolver {
 
@@ -22,9 +22,9 @@ public class FillInSolver {
     private Set<String> valuesFromBlanks = new HashSet<>();
 
     /**
-     * Method solves the fill-in puzzle, based on two input files - blanks and words, then populates each blank's candidates set
+     * Solves the fill-in puzzle, based on two input files - blanks and words, then populates each blank's candidates set
      * with words of the same length. Then, for each value got from blanks it compares character at a specific index.
-     * In the end it writes solution the the output file.
+     * In the end it writes solution to the output file.
      *
      * @param blanksFileName   Name of a file containing crossword structure (blanks).
      * @param wordsFileName    Name of a file containing words.

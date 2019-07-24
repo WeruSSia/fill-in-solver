@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Class represents the blank from the crossword. As blank contains of dots and values (on specified indexes)
+ * Represents a blank from the crossword. As a blank contains of dots and values (on specified indexes)
  * the class has a set of values and their indexes as pairs. There is also a list of candidates - words that have the same length as blank.
  */
 class Blank {
@@ -20,9 +20,7 @@ class Blank {
     }
 
     /**
-     * Method converts blank and its candidates list to String.
-     *
-     * @return Blank and its list of candidates.
+     * @return Blank and its list of candidates as String.
      */
     @Override
     public String toString() {
@@ -41,7 +39,7 @@ class Blank {
     }
 
     /**
-     * Method looks for the index of a given value in the corresponding indexValuePair.
+     * Looks for the index of a given value in the corresponding indexValuePair.
      *
      * @param value Value of which the index will be returned.
      * @return Index of a given value.
@@ -58,7 +56,7 @@ class Blank {
     }
 
     /**
-     * Method gets the set of characters at an index of a given value from words in candidates set.
+     * Gets the set of characters at an index of a given value from words in candidates set.
      *
      * @param value Value that is on the same index as a character that needs to be read.
      * @return Set of characters at index of a given value.
@@ -99,8 +97,6 @@ class Blank {
     }
 
     /**
-     * Method gets the set of candidates (words of the same length) for a blank.
-     *
      * @return Set of candidates.
      */
     Set<String> getCandidates() {
@@ -108,8 +104,6 @@ class Blank {
     }
 
     /**
-     * Method gets the length of a blank.
-     *
      * @return Length of a blank.
      */
     int getBlankLength() {
@@ -117,8 +111,6 @@ class Blank {
     }
 
     /**
-     * Method gets set of all the values that blank contains.
-     *
      * @return Set of values that blank contains.
      */
     Set<String> getValues() {
@@ -130,7 +122,7 @@ class Blank {
     }
 
     /**
-     * Class represents a pair of a value from a blank and its index.
+     * Represents a pair of a value from a blank and its index.
      */
     class IndexValuePair {
         private int index;
@@ -142,8 +134,6 @@ class Blank {
         }
 
         /**
-         * Gets index from the index-value pair.
-         *
          * @return Index.
          */
         int getIndex() {
@@ -151,8 +141,6 @@ class Blank {
         }
 
         /**
-         * Gets value from the index-value pair.
-         *
          * @return Value.
          */
         String getValue() {

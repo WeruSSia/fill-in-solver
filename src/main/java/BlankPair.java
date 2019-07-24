@@ -1,5 +1,5 @@
 /**
- * Class represents two blanks that has common value.
+ * Represents a pair of blanks that has common value.
  */
 class BlankPair {
 
@@ -24,8 +24,6 @@ class BlankPair {
     }
 
     /**
-     * Gets first blank from a pair.
-     *
      * @return First blank from a pair.
      */
     Blank getFirstBlank() {
@@ -33,8 +31,6 @@ class BlankPair {
     }
 
     /**
-     * Gets second blank from a pair.
-     *
      * @return Second blank from a pair.
      */
     Blank getSecondBlank() {
