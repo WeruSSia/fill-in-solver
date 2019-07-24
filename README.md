@@ -40,6 +40,7 @@ monkey
 . 3 . . 4 . [monkey]
 . . 2 . 3 [rhino]
 1 . . . . 4 . [chicken]
+```
 
 ### Solved fill-in puzzle
 
