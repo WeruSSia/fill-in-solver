@@ -9,11 +9,11 @@ import java.util.Set;
  * that words should be put into.<br><br>
  * In words file each word must be in a different line.<br><br>
  * Crossword structure file must meet these requirements:<br>
- * - each blank mus be in a different line,<br>
+ * - each blank must be in a different line,<br>
  * - blank contains of '.' and numbers, in which '.' is an empty field, and a number is a field that crosses with another blank,<br>
  * - between each '.' and number must be a space.<br><br>
  * User can input more words that there are blanks. The program will try to match as many correct words to blanks as possible considering every option,
- * but there always has to be a correct answer, otherwise program won't be able to show correct solution.
+ * but there always must be a correct answer, otherwise program won't be able to show correct solution.
  */
 @SuppressWarnings("WeakerAccess")
 public class FillInSolver {
